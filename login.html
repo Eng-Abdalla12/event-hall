@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rayaan Hall - Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+<div class="login-box">
+  <h2>Login to RayaanHall</h2>
+  <form id="loginForm">
+    <label>Email</label>
+    <input type="email" name="email" required />
+    <div class="error" id="emailError"></div>
+
+    <label>Password</label>
+    <input type="password" name="password" required />
+    <div class="error" id="passwordError"></div>
+
+    <button type="submit">Login</button>
+    <div class="success" id="loginSuccess"></div>
+  </form>
+</div>
+
+<script>
+$('#loginForm').on('submit', function(e) {
+  e.preventDefault();
+  let email = $('input[name="email"]').val().trim();
+  let password = $('input[name="password"]').val().trim();
+  let valid = true;
+
+  // Clear error messages
+  $('#emailError, #passwordError').text('');
+  
+  if (!email) {
+    $('#emailError').text('Email is required');
+    valid = false;
+  } else if (!/\S+@\S+\.\S+/.test(email)) {
+    $('#emailError').text('Enter a valid email');
+    valid = false;
+  }
+
+  if (!password) {
+    $('#passwordError').text('Password is required');
+    valid = false;
+  } else if (password.length < 4) {
+    $('#passwordError').text('Password must be at least 4 characters');
+    valid = false;
+  }
+
+  if (valid) {
+    // Clear success message div if any
+    $('#loginSuccess').text('');
+    // Show alert instead of inline text
+    alert('✅ Login successful');
+    this.reset();
+  }
+});
+</script>
+
+</body>
+</html>

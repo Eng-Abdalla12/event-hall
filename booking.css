@@ -1,0 +1,76 @@
+
+    h2 {
+      text-align: center;
+      margin: 30px 0 10px;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .event {
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .event.full {
+      border-color: red;
+      background: #ffecec;
+      opacity: 0.6;
+    }
+
+    .desc {
+      display: none;
+      color: #444;
+      margin: 10px 0;
+      font-size: 14px;
+    }
+
+    .toggle-desc {
+      background: none;
+      border: none;
+      color: #007bff;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    input, select, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: gold;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    .fixed-bar {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .fixed-bar {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #222;
+        color: white;
+        padding: 12px;
+        text-align: center;
+      }
+    }

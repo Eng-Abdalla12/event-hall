@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>RayaanHall - Book Event</title>
+  <link rel="stylesheet" href="./booking.css">
+
+</head>
+<body>
+
+<h2> Book Your Event</h2>
+
+<div class="container" id="eventList"></div>
+
+<div class="fixed-bar"></div> Tip: Click "Show Details" to learn about each event before booking!</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+      const events = [
+    { id: 1, title: "Wedding Ceremony", desc: "Celebrate love in a grand style.", capacity: 2, booked: [] },
+    { id: 2, title: "Graduation Gala", desc: "Celebrate academic achievement.", capacity: 3, booked: [] },
+    { id: 3, title: "Business Conference", desc: "Connect with professionals.", capacity: 3, booked: [] }
+  ];
+
+  const render = () => {
+    $("#eventList").html(events.map(ev => `
+      <div class="event ${ev.booked.length >= ev.capacity ? 'full' : ''}" data-id="${ev.id}">
+        <strong>${ev.title}</strong>
+        <button class="toggle-desc">Show Details</button>
+        <div class="desc">${ev.desc}</div>
+        <form class="booking-form">
+          <input name="name" placeholder="Your Name" required />
+          <input name="email" type="email" placeholder="Your Email" required />
+          <button ${ev.booked.length >= ev.capacity ? 'disabled' : ''}>Book Now</button>
+        </form>
+      </div>
+    `).join(''));
+  };
+
+  $(document).on('click', '.toggle-desc', function () {
+    const $desc = $(this).siblings('.desc');
+    $desc.slideToggle();
+    $(this).text($desc.is(':visible') ? 'Hide Details' : 'Show Details');
+  });
+
+  $(document).on('submit', '.booking-form', function (e) {
+    e.preventDefault();
+    const $form = $(this);
+    const $card = $form.closest('.event');
+    const id = +$card.data('id');
+    const name = $form.find('[name="name"]').val().trim();
+    const email = $form.find('[name="email"]').val().trim().toLowerCase();
+    const ev = events.find(e => e.id === id);
+
+    if (ev.booked.includes(email)) return alert("❌ You already booked this event!");
+    if (ev.booked.length >= ev.capacity) return alert("❌ This event is fully booked!");
+
+    ev.booked.push(email);
+    alert(`✅ Booking successful for ${ev.title}`);
+    render();
+  });
+
+  render();
+</script>
